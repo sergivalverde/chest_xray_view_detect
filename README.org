@@ -1,6 +1,4 @@
-* Diagnosing COVID-19 using chest x-ray images
-
-** What is the goal?
+* Detecting view in chest x-ray images
 
 The main goal of this repository is to provide an "easy to use" tool that can be used to detect the patients' view position in chest x-ray images. So far, it is able to differentiate between =frontal=, =lateral= and non chest images.
 
