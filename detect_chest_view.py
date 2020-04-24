@@ -91,7 +91,7 @@ if __name__ == "__main__":
     # MODEL_PATH: {'bind': DOCKER_MODEL_PATH, 'mode': 'rw'}}
 
     # Internal python command
-    COMMAND = 'python /home/docker/src/inference/predict_view.py' + \
+    COMMAND = 'python /home/docker/src/inference/predict_image_view.py' + \
               ' --input_scan ' + os.path.join(DOCKER_DATA_PATH, IMAGE_PATH) + \
               ' --output_path ' + DOCKER_DATA_PATH
 
