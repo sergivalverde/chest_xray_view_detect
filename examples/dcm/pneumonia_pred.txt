@@ -1,0 +1,14 @@
+--------------------------------------------------
+VICOROB (Universitat de Girona) 2020 
+https://vicorob.udg.edu
+
+PREAMBLE:
+- This is a research tool, do not use it as a diagnostic tool
+--------------------------------------------------
+
+
+Input probabilities for case: pneumonia
+--------------------------------------------------
+Probability to COVID: 2.3246002e-06
+--------------------------------------------------
+Prediction performed at 23/04/2020 21:07:20

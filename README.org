@@ -1,0 +1,98 @@
+* Diagnosing COVID-19 using chest x-ray images
+
+** Background
+
+[[https://github.com/ieee8023/covid-chestxray-dataset][Background extracted from here]]
+
+The 2019 novel coronavirus (COVID-19) presents several unique features. While the diagnosis is confirmed using polymerase chain reaction (PCR), infected patients with pneumonia may present on chest X-ray and computed tomography (CT) images with a pattern that is only moderately characteristic for the human eye [[https://pubs.rsna.org/doi/10.1148/ryct.2020200034][Ng2020]]. COVID-19’s rate of transmission depends on our capacity to reliably identify infected patients with a low rate of false negatives. In addition, a low rate of false positives is required to avoid further increasing the burden on the healthcare system by unnecessarily exposing patients to quarantine if that is not required. Along with proper infection control, it is evident that timely detection of the disease would enable the implementation of all the supportive care required by patients affected by COVID-19.
+
+** Motivation
+
+[[https://github.com/ieee8023/covid-chestxray-dataset][Motivation extracted from here]]
+
+While PCR tests offer many advantages they are physical things that require shipping the test or the sample. X-ray machines can be plugged in to screen patients as long as they have electricity.
+
+Imagine a future where we run out of tests and then the majority of radiologists get sick. AI tools can help general practitioners to triage and treat patients.
+
+
+** What is the goal?
+
+The main goal of this repository is to provide an "easy to use" tool that can be used to diagnose the COVID-19 using only chest x-ray images.
+
+
+* How to install the software:
+
+The original implementation of this program has been programmed in [[www.python.org][Python]] using the [[www.pytorch.org][Pytorch]] deep learning toolkit and the [[www.fastai.ai][fast.ai]] library.  However, installing deep learning libraries in certain settings can be cumbersome or not convenient. We have simplified this process by encapsulating all the heavy lifting inside a [[www.docker.com][Docker]] container.
+
+*** Install Docker:
+
+Please follow the [[https://docs.docker.com/install/][guide]] to install [[www.docker.com][Docker]] for your operating system:
+
+- [[https://docs.docker.com/docker-for-windows/install/][Windows]]
+- [[https://docs.docker.com/docker-for-mac/install/][Mac]]
+- [[https://docs.docker.com/install/linux/docker-ce/ubuntu/][GNU/Linux (Ubuntu)]]
+
+If you are on Linux a want to use the GPU capabilities of your local machine, please be sure that you install the [[https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)][nvidia-docker (version 2.0)]] packages. For this particular problem, we discourage it, as in most of our experiments, the software runs in less than 10 seconds without using the GPU.
+
+*** Install Python:
+
+A [[www.python.org][Python]] installation. Then, install all the required packages using =pip= as follows:
+
+#+begin_src python
+pip install pyfiglet docker
+#+end_src
+
+or using the requirements file:
+#+begin_src python
+pip install -r requirements.txt
+#+end_src
+
+* How to use it:
+
+To use this tool, just run =python infer_covid19.py --help= from the same source folder to see all the available options. The first time you run the software, it will download automatically the automated =docker container= from the [[https://hub.docker.com/][Docker Hub]].
+
+** Mandatory parameters:
+- input_image (=--input_image=): input scan to process. The input scan can be an image file (=jpeg=, =bmp=, etc...) or a  DICOM =dcm= file.
+
+** Optional parameters:
+- model (=--model=): Model to use. (not implemented yet).
+- gpu use (=--gpu=): use GPU for faster inference (default=No).
+- update (=--update=): update the Docker image.
+
+** Example:
+
+Just an example of how to use the software. Let's use some of the cases of the examples folder. In the case of =jpeg= file:
+
+#+begin_src bash
+python infer_covid19.py --input_image examples/dcm/pneumonia_example.dcm
+#+end_src
+
+When finished, the software will generate a file called =pneumonia_example_pred.txt= inside the same image folder along with a =pneumonia_example.csv= file with the predicted probability for the disease:
+
+#+begin_src
+--------------------------------------------------
+VICOROB (Universitat de Girona) 2020
+https://vicorob.udg.edu
+
+PREAMBLE:
+- This is a research tool, do not use it as a diagnostic tool
+--------------------------------------------------
+
+
+Input probabilities for case: pneumonia_example
+--------------------------------------------------
+Probability to COVID: 2.3246002e-06
+--------------------------------------------------
+Prediction performed at 23/04/2020 21:08:23
+#+end_src
+
+* License:
+
+This software is released under the version 3 of the GNU General Public License. Please read the license terms before using the software. A copy of this license is present in the root directory.
+
+
+* Todo:
+- Incorporate model selection from folder.
+
+* Contact
+Contact: [[https://github.com/sergivalverde][Sergi Valverde]], Postodoctoral researcher, University of Girona, Spain.
